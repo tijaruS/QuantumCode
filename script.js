@@ -32,18 +32,19 @@ function signInWithGitHub() {
 
 // Generic function to sign in with a given provider
 function signInWithProvider(provider) {
-  firebase.auth()
-      .signInWithPopup(provider)
-      .then((result) => {
-          // Successful login, redirect or perform further actions
-          console.log(result.user);
-          alert('Login successful! Redirecting...');
-          // Add your redirection logic here
-      })
-      .catch((error) => {
-          // Display error message
-          document.getElementById('loginError').textContent = error.message;
-      });
+  firebase
+    .auth()
+    .signInWithPopup(provider)
+    .then((result) => {
+      // Successful login, redirect or perform further actions
+      console.log(result.user);
+      alert("Login successful! Redirecting...");
+      // Add your redirection logic here
+    })
+    .catch((error) => {
+      // Display error message
+      document.getElementById("loginError").textContent = error.message;
+    });
 }
 // You can add JavaScript functionality for the user profile here
 // For example, fetching and displaying user information
