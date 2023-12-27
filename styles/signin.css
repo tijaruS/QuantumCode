@@ -2,3 +2,25 @@ body {
   background: #ececec;
   font-family: "Poppins", sans-serif;
 }
+.wrapper .logo img {
+  width: 150px;
+  margin-bottom: 20px;
+}
+.wrapper input:focus {
+  box-shadow: none;
+}
+.wrapper .submit_btn {
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 15px 0;
+  width: 100%;
+  border-radius: 5px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.wrapper {
+  padding: 0 0 100px;
+  background-image: url();
+}
