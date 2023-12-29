@@ -2,7 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import {
   getAuth,
-  googleauthprovider,
+  GoogleAuthProvider,
   signInWithPopup,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -21,13 +21,13 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 auth.languageCode = "en";
 const analytics = getAnalytics(app);
-const provider = new googleauthprovider();
+const provider = new GoogleAuthProvider();
 
-const googleLogin = document.getElementById("google-login");
+const googleLogin = document.getElementById("google-login-tag");
 googleLogin.addEventListener("click", () => {
   signInWithPopup(auth, provider)
     .then((result) => {
-      const credential = googleauthprovider.credentialFromResult(result);
+      const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
       console.log(user);
@@ -37,7 +37,7 @@ googleLogin.addEventListener("click", () => {
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
-      const credential = googleauthprovider.credentialFromError(error);
+      const credential = GoogleAuthProvider.credentialFromError(error);
       console.log(errorCode, errorMessage, email, credential);
     });
 });
