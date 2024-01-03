@@ -7,7 +7,6 @@ const showWhenLoggedout = document.querySelectorAll("#showWhenLoggedOut");
 let userName = document.querySelector("#user-name");
 const profilePhoto1 = document.querySelector(".avatar1");
 const profilePhoto2 = document.querySelector(".avatar2");
-console.log(profilePhoto1.src);
 
 const UI = (user) => {
   if (user) {
