@@ -17,15 +17,21 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"
+    />
+    <script src="./scripts/whetheruserissignin.js" type="module" defer></script>
+    <script src="./scripts/signout.js" type="module" defer></script>
   </head>
   <body>
-    <div class="absolute">
+    <!-- <div class="absolute">
       <div class="absolute inset-0 center">
         <div class="bg-shape1 bg-teal opacity-50 bg-blur"></div>
         <div class="bg-shape2 bg-primary opacity-50 bg-blur"></div>
         <div class="bg-shape1 bg-purple opacity-50 bg-blur"></div>
       </div>
-    </div>
+    </div> -->
     <nav class="navbar navbar-expand-lg bg-transparent shadow-sm">
       <div class="container">
         <a class="navbar-brand" href="index.html">
@@ -39,7 +45,7 @@
         </a>
 
         <button
-          class="navbar-toggler"
+          class="navbar-toggler shadow-none border-0"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -68,17 +74,57 @@
           </ul>
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="btn btn-outline-dark rounded-5" href="signup.html"
+              <a
+                class="btn btn-outline-dark rounded-5"
+                href="signup.html"
+                id="showWhenLoggedOut"
+                style="display: none"
                 >Sign Up</a
               >
             </li>
-            <li class="nav-item nav-link">Or</li>
+            <li
+              class="nav-item nav-link"
+              id="showWhenLoggedOut"
+              style="display: none"
+            >
+              Or
+            </li>
             <li class="nav-item">
-              <a class="btn btn-outline-dark rounded-5" href="signin.html"
+              <a
+                class="btn btn-outline-dark rounded-5"
+                href="signin.html"
+                id="showWhenLoggedOut"
+                style="display: none"
                 >Sign in</a
               >
             </li>
           </ul>
+        </div>
+
+        <img
+          src="./assets/Minimalist Digital Service Developer Logo (1).png"
+          alt=""
+          class="user-pic avatar1"
+          id="showWhenLoggedIn"
+          onclick="showMenu()"
+          style="display: none"
+        />
+        <div class="sub-menu-wrap" id="subMenu">
+          <div class="sub-menu">
+            <div class="user-info">
+              <img
+                src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
+                alt=""
+                class="avatar2"
+              />
+              <h3 id="user-name"></h3>
+            </div>
+            <hr />
+            <a href="#" class="sub-menu-link" id="signOut"
+              ><i class="bi bi-box-arrow-left"></i>
+              <p>Sign Out</p>
+            </a>
+          </div>
         </div>
       </div>
     </nav>
