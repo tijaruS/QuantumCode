@@ -28,6 +28,7 @@ const provider = new GoogleAuthProvider();
 const googleLogin = document.getElementById("google-login-tag");
 googleLogin.addEventListener("click", (e) => {
   e.preventDefault();
+  googleLogin.innerHTML = "Signing In...";
   signInWithRedirect(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);

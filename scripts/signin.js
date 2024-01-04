@@ -28,7 +28,9 @@ signInForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const email = signInForm["loginEmail"].value;
   const password = signInForm["loginPassword"].value;
+  const signInButton = document.querySelector("#signInButton");
   console.log(email, password);
+  signInButton.innerHTML = "Signing In...";
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -36,6 +38,7 @@ signInForm.addEventListener("submit", (e) => {
 
       window.location.href = "index.html";
       console.log(user);
+      signInButton.innerHTML = "Sign In";
       // ...
     })
     .catch((error) => {
