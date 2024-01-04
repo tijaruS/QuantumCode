@@ -5,9 +5,9 @@ auth.onAuthStateChanged(function (user) {
     // Redirect the user to the appropriate page.
     console.log("user is signed in");
     console.log(user);
-    UI(user);
+    showUI(user);
   } else {
-    UI();
+    showUI();
     // No user is signed in.
     // Redirect the user to the sign-in page.
     console.log("user is not signed in");

@@ -8,7 +8,7 @@ let userName = document.querySelector("#user-name");
 const profilePhoto1 = document.querySelector(".avatar1");
 const profilePhoto2 = document.querySelector(".avatar2");
 
-const UI = (user) => {
+const showUI = (user) => {
   if (user) {
     //account info
 
