@@ -5,14 +5,14 @@ function showMenu() {
 const showWhenLoggedIn = document.querySelectorAll("#showWhenLoggedIn");
 const showWhenLoggedout = document.querySelectorAll("#showWhenLoggedOut");
 let userName = document.querySelector("#user-name");
+let profileName = document.querySelector("#profile-name");
 const profilePhoto1 = document.querySelector(".avatar1");
 const profilePhoto2 = document.querySelector(".avatar2");
+const profilePhoto3 = document.querySelector(".profile-photo");
 
 const showUI = (user) => {
   if (user) {
     //account info
-
-    // userName.textContent = `${user.email}`;
     if (user.displayName === null) {
       user.email = user.email.split("@")[0];
       userName.textContent = `${user.email}`;

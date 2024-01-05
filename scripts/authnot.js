@@ -48,11 +48,7 @@ googleLogin.addEventListener("click", (e) => {
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
-    // User is signed in.
-    // Redirect to the home page.
     window.location.href = "index.html";
   } else {
-    // User is signed out.
-    // Redirect to the login page.
   }
 });
