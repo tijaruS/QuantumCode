@@ -9,7 +9,7 @@ let profileName = document.querySelector("#profile-name");
 const profilePhoto1 = document.querySelector(".avatar1");
 const profilePhoto2 = document.querySelector(".avatar2");
 const profilePhoto3 = document.querySelector(".profile-photo");
-
+// const inputUserName = document.querySelector("#inputUserName");
 const showUI = (user) => {
   if (user) {
     //account info
