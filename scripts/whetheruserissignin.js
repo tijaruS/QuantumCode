@@ -1,4 +1,5 @@
 import { auth } from "./auth.js";
+
 auth.onAuthStateChanged(function (user) {
   if (user) {
     console.log("user is signed in");

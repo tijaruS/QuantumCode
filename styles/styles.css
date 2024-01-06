@@ -151,3 +151,9 @@
 .sub-menu-link:hover {
   color: #000;
 }
+
+.autocomplete-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
