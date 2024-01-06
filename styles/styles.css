@@ -2,7 +2,7 @@
 
 .absolute {
   position: absolute;
-  top: 50px !important;
+  top: 50px;
   inset: 0;
   justify-content: center;
   display: inline-flex;
