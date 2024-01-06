@@ -39,19 +39,17 @@ const showUI = (user) => {
   }
 };
 
-// const fetch = require("node-fetch");
-
-const apiKey = "0990a51ea08fcdf4b7bab884402d3f064bb630c6";
-const url = `https://codeforces.com/api/user.ratedList?activeOnly=true`;
-let users = [];
-fetch(url)
-  .then((response) => response.json())
-  .then((data) => {
-    for (const user of data.result) {
-      users.map((user) => {
-        user.handle;
-      });
-      console.log(users);
-    }
-  })
-  .catch((error) => console.error(error));
+// const apiKey = "0990a51ea08fcdf4b7bab884402d3f064bb630c6";
+// const url = `https://codeforces.com/api/user.ratedList?activeOnly=true`;
+// let users = [];
+// fetch(url)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     for (const user of data.result) {
+//       users.map((user) => {
+//          user.handle;
+//       });
+//       console.log(users);
+//     }
+//   })
+//   .catch((error) => console.error(error));
