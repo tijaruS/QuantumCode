@@ -35,6 +35,9 @@ googleLogin.addEventListener("click", (e) => {
       const token = credential.accessToken;
       const user = result.user;
       console.log(user);
+      // window.location.href = "index.html";
+    })
+    .then(() => {
       window.location.href = "index.html";
     })
     .catch((error) => {

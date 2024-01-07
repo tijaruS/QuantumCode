@@ -149,65 +149,10 @@
     <footer class="text-center mt-5">
       <p>&copy; 2024 QuantumCode. All rights reserved.</p>
     </footer>
-    <script type="module">
-      
-     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-     const firebaseConfig = {
-        apiKey: "AIzaSyDUK2UwEJM5lITO9inXtVT8rkEwBtvhuCY",
-        authDomain: "quantumcode-me.firebaseapp.com",
-        projectId: "quantumcode-me",
-        storageBucket: "quantumcode-me.appspot.com",
-        messagingSenderId: "288891407284",
-        appId: "1:288891407284:web:6bf03397bc432e7d3e00e1",
-        measurementId: "G-ZKRYZJE51V",
-      };
-
-      import {
-        getAuth,
-        GoogleAuthProvider,
-        signInWithRedirect,
-        createUserWithEmailAndPassword,
-      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const signUpForm = document.querySelector("#signUpForm");
-      document.querySelector("#signUpForm").oninput =
-        function () {
-          let password = document.querySelector("#floatingPassword").value;
-          let confirmPassword = document.querySelector("#floatingConfirmPassword").value;
-        if (password != confirmPassword) {
-          document.querySelector("#passwordMismatch").style.display =
-            "inline";
-            const signUpButton = document.querySelector("#signUpButton");
-            signUpButton.disabled = true;
-        } else {
-          const signUpButton = document.querySelector("#signUpButton");
-            signUpButton.disabled = false;
-          document.querySelector("#passwordMismatch").style.display =
-            "none";
-          signUpForm.addEventListener("submit", (e) => {
-          e.preventDefault();
-          const email = signUpForm["floatingInput"].value;
-          const password = signUpForm["floatingPassword"].value;
-          const confirmPassword = signUpForm["floatingConfirmPassword"].value;
-          createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-              const user = userCredential.user;
-
-              signUpForm.reset();
-              window.location.href = "index.html";
-            })
-            .catch((error) => {
-              const errorCode = error.code;
-              const errorMessage = error.message;
-              console.log(error);
-        });
-    });
-  }};
-  
-    </script>
-    <script src="scripts/authnot.js" defer type="module"></script>
-    <script src="scripts/whetheruserissignin.js" defer type="module"></script>
+    
+    <!-- <script src="scripts/authnot.js" defer type="module"></script>
+    <script src="scripts/whetheruserissignin.js" defer type="module"></script> -->
+    <!-- <script src="./scripts/auth.js" type="module" defer></script> -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

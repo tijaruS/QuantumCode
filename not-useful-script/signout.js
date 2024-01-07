@@ -1,5 +1,5 @@
 const signOut = document.querySelector("#signOut");
-import { auth } from "./auth.js";
+import { auth } from "../scripts/auth.js";
 
 signOut.addEventListener("click", (e) => {
   e.preventDefault();

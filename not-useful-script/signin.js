@@ -36,10 +36,13 @@ signInForm.addEventListener("submit", (e) => {
       // Signed in
       const user = userCredential.user;
 
-      window.location.href = "index.html";
       console.log(user);
+      // window.location.href = "index.html";
       signInButton.innerHTML = "Sign In";
       // ...
+    })
+    .then(() => {
+      window.location.href = "index.html";
     })
     .catch((error) => {
       const errorCode = error.code;
