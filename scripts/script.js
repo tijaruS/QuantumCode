@@ -61,7 +61,9 @@ const showProfile = (user) => {
 
     if (user.displayName === null) {
       user.email = user.email.split("@")[0];
-      profileName.textContent = `${user.email}`;
+      if (profileName != undefined) {
+        profileName.textContent = `${user.email}`;
+      }
     } else {
       if (profileName != undefined) {
         profileName.textContent = `${user.displayName}`;
@@ -74,8 +76,10 @@ const showProfile = (user) => {
       }
       // profilePhoto3.src = `${user.photoURL}`;
     } else {
-      profilePhoto3.src =
-        "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
+      if (profilePhoto3 != undefined) {
+        profilePhoto3.src =
+          "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
+      }
     }
   }
 };

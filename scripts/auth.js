@@ -48,6 +48,7 @@ if (signUpForm != null) {
         const email = signUpForm["floatingInput"].value;
         const password = signUpForm["floatingPassword"].value;
         const confirmPassword = signUpForm["floatingConfirmPassword"].value;
+        signUpButton.innerHTML = "Signing Up...";
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
@@ -73,7 +74,7 @@ if (signInForm != null) {
     const email = signInForm["loginEmail"].value;
     const password = signInForm["loginPassword"].value;
     const signInButton = document.querySelector("#signInButton");
-    console.log(email, password);
+    // console.log(email, password);
     signInButton.innerHTML = "Signing In...";
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -131,21 +132,11 @@ if (googleLogin != null) {
 }
 
 //sign out
-if (!window.location.pathname === "/signin.html") {
-  signOut.addEventListener("click", (e) => {
-    e.preventDefault();
-    auth
-      .signOut()
-      .then(() => {
-        // Sign-out successful.
-        console.log("signed out");
-        showMenu();
-      })
-      .catch((error) => {
-        // An error happened.
-      });
-  });
-} else if (!window.location.pathname === "/signup.html") {
+const signOut = document.querySelector("#signOut");
+if (
+  window.location.pathname != "/signin.html" &&
+  window.location.pathname != "/signup.html"
+) {
   signOut.addEventListener("click", (e) => {
     e.preventDefault();
     auth
@@ -160,6 +151,21 @@ if (!window.location.pathname === "/signin.html") {
       });
   });
 }
+// else if (window.location.pathname != "/signup.html") {
+//   signOut.addEventListener("click", (e) => {
+//     e.preventDefault();
+//     auth
+//       .signOut()
+//       .then(() => {
+//         // Sign-out successful.
+//         console.log("signed out");
+//         showMenu();
+//       })
+//       .catch((error) => {
+//         // An error happened.
+//       });
+//   });
+// }
 
 //on auth state change
 auth.onAuthStateChanged(function (user) {
