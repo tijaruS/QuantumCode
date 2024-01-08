@@ -109,10 +109,6 @@ if (googleLogin != null) {
         const token = credential.accessToken;
         const user = result.user;
         console.log(user);
-        // window.location.href = "index.html";
-      })
-      .then(() => {
-        window.location.href = "index.html";
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -154,21 +150,6 @@ if (
       });
   });
 }
-// else if (window.location.pathname != "/signup.html") {
-//   signOut.addEventListener("click", (e) => {
-//     e.preventDefault();
-//     auth
-//       .signOut()
-//       .then(() => {
-//         // Sign-out successful.
-//         console.log("signed out");
-//         showMenu();
-//       })
-//       .catch((error) => {
-//         // An error happened.
-//       });
-//   });
-// }
 
 //on auth state change
 auth.onAuthStateChanged(function (user) {
