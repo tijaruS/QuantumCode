@@ -9,6 +9,7 @@ auth.onAuthStateChanged(function (user) {
     //   showProfile(user);
     // }
     showProfile(user);
+    document.querySelector("#pastContests").style.display = "block";
   } else {
     if (window.location.pathname === "/signin.html") {
       return;

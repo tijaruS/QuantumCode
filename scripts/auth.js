@@ -22,7 +22,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
 //sign up
@@ -155,10 +155,16 @@ if (
 auth.onAuthStateChanged(function (user) {
   if (user) {
     console.log("user is signed in");
-    console.log(user);
+    // console.log(user);
+    // console.log(user.uid);
+
     showUI(user);
 
     showProfile(user);
+
+    // const pastContests = document.querySelector("#pastContests");
+    // pastContests.style.display = "block";
+    // document.querySelector("#text").style.display = "none";
   } else {
     if (window.location.pathname === "/signin.html") {
       return;
@@ -168,6 +174,9 @@ auth.onAuthStateChanged(function (user) {
       showUI();
     }
     showProfile();
-    console.log("user is not signed in");
+
+    // const pastContests = document.querySelector("#pastContests");
+    // pastContests.style.display = "none";
+    // document.querySelector("#text").style.display = "block";
   }
 });

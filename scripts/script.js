@@ -1,3 +1,5 @@
+// const e = require("cors");
+
 let subMenu = document.querySelector("#subMenu");
 function showMenu() {
   subMenu.classList.toggle("open-menu");
@@ -93,3 +95,8 @@ const showProfile = (user) => {
 //     console.log(dataobj);
 //   })
 //   .catch((error) => console.error(error));
+// const savedUsername = localStorage.getItem("username");
+// if (savedUsername) {
+//   // document.getElementById('alert-message1').classList.remove('d-none');
+//   usernameInput.value = savedUsername;
+// }
