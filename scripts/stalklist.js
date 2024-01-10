@@ -13,5 +13,3 @@ auth.onAuthStateChanged(function (user) {
     document.querySelector("#ifLoggedOut").style.display = "block";
   }
 });
-
-console.log(userId);
