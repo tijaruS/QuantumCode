@@ -22,7 +22,7 @@
     <!-- <script src="./scripts/whetheruserissignin.js" type="module" defer></script>
     <script src="./scripts/signout.js" type="module" defer></script> -->
     <script src="./scripts/auth.js" type="module" defer></script>
-    <script src="./scripts/index.js" type="module" defer></script>
+    <script src="./scripts/stalklist.js" type="module" defer></script>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg bg-transparent shadow-sm">
@@ -131,6 +131,12 @@
         </div>
       </div>
     </nav>
+    <div class="container">
+      <h2 id="ifLoggedIn" style="display: none">
+        StalkList of @ <span id="userName"></span>
+      </h2>
+      <h2 id="ifLoggedOut" style="display: none">Log in to view StalkList</h2>
+    </div>
 
     <!-- footer -->
 
