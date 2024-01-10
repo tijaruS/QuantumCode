@@ -225,6 +225,7 @@
 }
 #avtar-container {
   border-radius: 999px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
 }
 .profile p {
   font-size: 18px;
