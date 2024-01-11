@@ -144,6 +144,7 @@ if (
       })
       .then(() => {
         window.location.href = "index.html";
+        localStorage.removeItem("userUid");
       })
       .catch((error) => {
         // An error happened.
@@ -155,6 +156,7 @@ if (
 auth.onAuthStateChanged(function (user) {
   if (user) {
     console.log("user is signed in");
+    localStorage.setItem("userUid", user.uid);
     // console.log(user);
     // console.log(user.uid);
 
@@ -180,3 +182,8 @@ auth.onAuthStateChanged(function (user) {
     // document.querySelector("#text").style.display = "block";
   }
 });
+const userUid = localStorage.getItem("userUid");
+if (userUid != null) {
+  console.log(userUid);
+}
+// console.log(userUid);
