@@ -11,6 +11,7 @@ if (form != null) {
 
 const usernameInput = document.querySelector("#search-form");
 export const nameInput = document.querySelector("#search");
+export let handle, imageUrl;
 // console.log(usernameInput);
 if (usernameInput != null) {
   usernameInput.addEventListener("submit", (event) => {
@@ -27,8 +28,10 @@ if (usernameInput != null) {
         const user = data.result[0];
         // console.log(user);
         const handle = user.handle;
+        localStorage.setItem("handle", handle);
         // console.log(handle);
         const imageUrl = user.titlePhoto;
+        localStorage.setItem("imageUrl", imageUrl);
         const friendOfCount = user.friendOfCount;
         const maxRank = user.maxRank;
         const maxRating = user.maxRating;
@@ -86,5 +89,61 @@ if (usernameInput != null) {
         document.getElementById("lastOnline").textContent = lastOnline;
         document.getElementById("registrationTime").textContent = registrationT;
       });
+  });
+}
+
+// firestore
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  getDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDUK2UwEJM5lITO9inXtVT8rkEwBtvhuCY",
+  authDomain: "quantumcode-me.firebaseapp.com",
+  projectId: "quantumcode-me",
+  storageBucket: "quantumcode-me.appspot.com",
+  messagingSenderId: "288891407284",
+  appId: "1:288891407284:web:6bf03397bc432e7d3e00e1",
+  measurementId: "G-ZKRYZJE51V",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+// db.settings({ timestampsInSnapshots: true });
+
+const colRef = collection(db, "StalkList");
+
+const addToStalkList = document.querySelector("#addToStalkList");
+console.log(addToStalkList);
+const addFriend = document.querySelector("#addFriend");
+const jsFollowerCard = document.querySelector("#js-follower-card");
+if (addToStalkList != null) {
+  addToStalkList.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    const h = localStorage.getItem("handle");
+    const i = localStorage.getItem("imageUrl");
+    const id = localStorage.getItem("userUid");
+    console.log(h, i, id);
+    addDoc(colRef, {
+      UID: id,
+      UserName: h,
+      ProfilePhotoURL: i,
+    }).then(() => {
+      // localStorage.removeItem("handle");
+      // localStorage.removeItem("imageUrl");
+      // localStorage.removeItem("userUid");
+      alert("added to stalklist");
+    });
   });
 }

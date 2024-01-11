@@ -145,6 +145,8 @@ if (
       .then(() => {
         window.location.href = "index.html";
         localStorage.removeItem("userUid");
+        localStorage.removeItem("handle");
+        localStorage.removeItem("imageUrl");
       })
       .catch((error) => {
         // An error happened.

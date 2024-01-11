@@ -245,6 +245,7 @@
   width: 200px;
   object-fit: cover;
   object-position: center;
+  border-radius: 10px;
 }
 /* p{
     margin: 0;
@@ -272,6 +273,7 @@
 }
 .follower-card {
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
   display: inline-block;
   margin-right: 10px;
 }
@@ -280,4 +282,9 @@
   font-weight: bold;
   padding-left: 5px;
   font-size: 18px;
+}
+#js-follower-card {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 10px;
 }
