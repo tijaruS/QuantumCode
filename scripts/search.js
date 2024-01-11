@@ -144,6 +144,7 @@ if (addToStalkList != null) {
       // localStorage.removeItem("imageUrl");
       // localStorage.removeItem("userUid");
       alert("added to stalklist");
+      location.reload();
     });
   });
 }

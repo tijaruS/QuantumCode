@@ -92,10 +92,7 @@ onSnapshot(colRef, (snapshot) => {
                 flex-direction: column;
               "
             >
-              <button class="follow-button" id='js-view-profile-button' onclick='window.location.href="search.html"
-              
-              nameInput.value=${element.value}
-              
+              <button class="follow-button" id='js-view-profile-button' onclick='window.open("https://codeforces.com/profile/${element.UserName}", "_blank")
               '>View Profile</button>
               
             </div>
