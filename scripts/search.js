@@ -91,7 +91,6 @@ if (usernameInput != null) {
       });
   });
 }
-
 // firestore
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
@@ -118,10 +117,9 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db = getFirestore(app);
+export const db = getFirestore(app);
 // db.settings({ timestampsInSnapshots: true });
-
-const colRef = collection(db, "StalkList");
+export const colRef = collection(db, "StalkList");
 
 const addToStalkList = document.querySelector("#addToStalkList");
 console.log(addToStalkList);

@@ -53,7 +53,7 @@
           <form class="rounded bg-transparent shadow p-5" id="signUpForm">
             <h3 class="text-dark fw-bolder fs-4 mb-4">Create an Account</h3>
 
-            <!-- <div class="form-floating mb-3">
+            <div class="form-floating mb-3">
               <input
                 type="text"
                 class="form-control"
@@ -62,7 +62,7 @@
                 required
               />
               <label for="floatingUserName">User Name</label>
-            </div> -->
+            </div>
             <div class="form-floating mb-3">
               <input
                 type="email"
@@ -84,7 +84,7 @@
               />
               <label for="floatingPassword">Password</label>
             </div>
-            <div class="form-floating mt-3">
+            <div class="form-floating my-3">
               <input
                 type="password"
                 class="form-control"
@@ -100,6 +100,16 @@
                 >The passwords you entered do not match.</span
               >
             </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                class="form-control"
+                id="floatingCollegeName"
+                placeholder=""
+                
+              />
+              <label for="floatingUserName">College</label>
+            </div>
             <div class="mt-2 text-end">
               <a
                 href="forgot-password.html"
@@ -112,11 +122,12 @@
               class="btn btn-primary submit_btn w-100 my-4 signUpButton"
               id="signUpButton"
               "
+              
             >
               Sign Up
             </button>
             <div class="fw-normal text-muted mb-4">
-              Have an account? <a href="signin.html">Sign In</a>
+              Have an account? <a href="signin.html" >Sign In</a>
             </div>
             <div class="text-center text-muted mb-3">
               or you can sign in with
@@ -153,6 +164,19 @@
     <!-- <script src="scripts/authnot.js" defer type="module"></script>
     <script src="scripts/whetheruserissignin.js" defer type="module"></script> -->
     <!-- <script src="./scripts/auth.js" type="module" defer></script> -->
+    <script type="module">
+      // const form = document.querySelector("#signUpForm");
+      // console.log(form)
+      // form.addEventlistener("submit", (e) => {
+      //   e.preventDefault();
+      //   addDoc(colRef1, {
+      //         UID: userUid,
+      //         UserID: userID,
+      //         Email: email,
+      //         College: collegeName,
+      //       });
+      // });
+    </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"

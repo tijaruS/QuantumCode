@@ -24,10 +24,26 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+//firebase
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  getDoc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
+// db.Settings({ timestampsInSnapshots: true });
 
 //sign up
 
-const signUpForm = document.querySelector("#signUpForm");
+export const signUpForm = document.querySelector("#signUpForm");
 // console.log(signInForm);
 if (signUpForm != null) {
   document.querySelector("#signUpForm").oninput = function () {
@@ -43,24 +59,49 @@ if (signUpForm != null) {
       const signUpButton = document.querySelector("#signUpButton");
       signUpButton.disabled = false;
       document.querySelector("#passwordMismatch").style.display = "none";
+      // signUpForm.addEventListener("submit", (e) => {
+      //   e.preventDefault();
+      //   const college = signUpForm["floatingCollegeName"].value;
+      //   const email = signUpForm["floatingInput"].value;
+      //   const UserName = signUpForm["floatingUserName"].value;
+      //   const password = signUpForm["floatingPassword"].value;
+      //   const confirmPassword = signUpForm["floatingConfirmPassword"].value;
+      //   signUpButton.innerHTML = "Signing Up...";
+      //   addDoc(colRef1, {
+      //     UserID: UserName,
+      //     Email: email,
+      //     College: college,
+      //   });
+      // });
+
       signUpForm.addEventListener("submit", (e) => {
         e.preventDefault();
+        const college = signUpForm["floatingCollegeName"].value;
         const email = signUpForm["floatingInput"].value;
+        const UserName = signUpForm["floatingUserName"].value;
         const password = signUpForm["floatingPassword"].value;
         const confirmPassword = signUpForm["floatingConfirmPassword"].value;
         signUpButton.innerHTML = "Signing Up...";
+
         createUserWithEmailAndPassword(auth, email, password)
           .then((userCredential) => {
             const user = userCredential.user;
-
-            signUpForm.reset();
-            window.location.href = "index.html";
+            localStorage.setItem("collegeName", college);
+            localStorage.setItem("userID", UserName);
+            localStorage.setItem("emailID", email);
+            localStorage.setItem("userUid", user.uid);
+          })
+          .then(() => {})
+          .then(() => {
+            // signUpForm.reset();
+            // window.location.href = "index.html";
           })
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.log(error);
-          });
+          })
+          .finally(() => {});
       });
     }
   };
@@ -147,6 +188,9 @@ if (
         localStorage.removeItem("userUid");
         localStorage.removeItem("handle");
         localStorage.removeItem("imageUrl");
+        localStorage.removeItem("collegeName");
+        localStorage.removeItem("userID");
+        localStorage.removeItem("emailID");
       })
       .catch((error) => {
         // An error happened.
@@ -159,8 +203,22 @@ auth.onAuthStateChanged(function (user) {
   if (user) {
     console.log("user is signed in");
     localStorage.setItem("userUid", user.uid);
+
     // console.log(user);
     // console.log(user.uid);
+    const userUid = localStorage.getItem("userUid");
+    const colRef1 = doc(db, "UserInfo", userUid);
+
+    const collegeName = localStorage.getItem("collegeName");
+    const emailID = localStorage.getItem("emailID");
+    const userID = localStorage.getItem("userID");
+    // console.log(userUid, collegeName, emailID, userID);
+    setDoc(colRef1, {
+      UID: userUid,
+      UserID: userID,
+      Email: emailID,
+      College: collegeName.toLocaleLowerCase(),
+    });
 
     showUI(user);
 
@@ -185,7 +243,18 @@ auth.onAuthStateChanged(function (user) {
   }
 });
 const userUid = localStorage.getItem("userUid");
-if (userUid != null) {
-  console.log(userUid);
+const collegeName = localStorage.getItem("collegeName");
+const emailID = localStorage.getItem("emailID");
+const userID = localStorage.getItem("userID");
+if (
+  userUid != null ||
+  collegeName != null ||
+  emailID != null ||
+  userID != null
+) {
+  // console.log(userUid);
+  // console.log(collegeName);
+  // console.log(emailID);
+  // console.log(userID);
 }
 // console.log(userUid);

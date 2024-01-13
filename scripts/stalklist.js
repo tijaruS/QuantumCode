@@ -51,7 +51,7 @@ function deleteSomething(a, b, c) {
   let docRef = doc(a, b, c);
   deleteDoc(docRef);
 }
-
+//firebase
 const colRef = collection(db, "StalkList");
 
 // const userUid = userUid();
@@ -68,11 +68,11 @@ onSnapshot(colRef, (snapshot) => {
   snapshot.docs.forEach((doc) => {
     stalkList.push({ ...doc.data(), id: doc.id });
   });
-  console.log(stalkList);
+  // console.log(stalkList);
   const filteredObj = stalkList.filter((list) => {
     return list.UID === `${userUid}`;
   });
-  console.log(filteredObj);
+  // console.log(filteredObj);
 
   filteredObj.forEach((element) => {
     const div1 = document.createElement("div");
