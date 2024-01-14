@@ -126,6 +126,14 @@
               ></a>
             </div>
             <hr />
+            <a
+              href="#"
+              class="sub-menu-link mb-2"
+              data-bs-target="#userList"
+              data-bs-toggle="modal"
+              ><i class="bi bi-card-checklist"></i>
+              <p>Users</p>
+            </a>
             <a href="stalklist.html" class="sub-menu-link mb-2"
               ><i class="bi bi-card-checklist"></i>
               <p>Stalklist</p>
@@ -138,6 +146,30 @@
         </div>
       </div>
     </nav>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="userList"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">User List</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+        </div>
+      </div>
+    </div>
+    <!--modal-->
     <div class="container">
       <h2 id="ifLoggedIn" style="display: none">
         StalkList of @ <span id="userName"></span>
