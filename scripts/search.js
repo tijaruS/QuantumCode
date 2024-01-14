@@ -92,7 +92,8 @@ if (usernameInput != null) {
   });
 }
 // firestore
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+
+// import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import {
   getFirestore,
   collection,
@@ -113,10 +114,10 @@ const firebaseConfig = {
   appId: "1:288891407284:web:6bf03397bc432e7d3e00e1",
   measurementId: "G-ZKRYZJE51V",
 };
-
+import { app } from "./auth.js";
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 // db.settings({ timestampsInSnapshots: true });
 export const colRef = collection(db, "StalkList");
