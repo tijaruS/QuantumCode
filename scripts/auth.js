@@ -3,6 +3,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebas
 import {
   getAuth,
   GoogleAuthProvider,
+  signInWithPopup,
   signInWithRedirect,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -152,13 +153,14 @@ if (googleLogin != null) {
   googleLogin.addEventListener("click", (e) => {
     e.preventDefault();
     googleLogin.innerHTML = "Signing In...";
-    signInWithRedirect(auth, provider)
+    signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         const user = result.user;
         console.log(user);
       })
+      .then(() => {})
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -167,7 +169,6 @@ if (googleLogin != null) {
         console.log(errorCode, errorMessage, email, credential);
       });
   });
-
   auth.onAuthStateChanged(function (user) {
     if (user) {
       window.location.href = "index.html";
@@ -199,6 +200,7 @@ if (
         localStorage.removeItem("collegeName");
         localStorage.removeItem("userID");
         localStorage.removeItem("emailID");
+        localStorage.removeItem("userEmail");
       })
       .catch((error) => {
         // An error happened.
@@ -211,6 +213,7 @@ auth.onAuthStateChanged(function (user) {
   if (user) {
     console.log("user is signed in");
     localStorage.setItem("userUid", user.uid);
+    localStorage.setItem("userEmail", user.email);
 
     console.log(user);
     // console.log(user.uid);
@@ -302,7 +305,8 @@ if (
     showUserList();
   });
 }
-
+const currnetUserEmail = localStorage.getItem("userEmail");
+// console.log(currnetUserEmail);
 function showUserList() {
   document.querySelector("#populateUserList").innerHTML = `
   <div class="spinner-border text-primary mx-auto" role="status">
@@ -310,10 +314,16 @@ function showUserList() {
   let html = "";
   const colDb = ref(rdb, "users/");
   onValue(colDb, (snapshot) => {
+    if (snapshot.hasChildren()) {
+      html = `<form class="d-flex mb-2" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      </form>`;
+    }
     snapshot.forEach((data) => {
       let use = data.val();
-      // console.log(use);
-      html += `
+      // console.log(use.email);
+      if (use.Email != currnetUserEmail) {
+        html += `
       <div style='display:flex;align-items:center;margin-bottom:10px'>
        <div class="userDP">
                 <img
@@ -327,10 +337,15 @@ function showUserList() {
                 <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
               </div>
               <div class="ms-auto">
-                <button class="btn btn-primary">Add friend</button>
+                <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+</svg>Add friend</button>
               </div>
       </div>
       `;
+      }
+
       document.querySelector("#populateUserList").innerHTML = html;
     });
   });
