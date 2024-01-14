@@ -10,6 +10,8 @@ import {
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUK2UwEJM5lITO9inXtVT8rkEwBtvhuCY",
+  databaseURL:
+    "https://quantumcode-me-default-rtdb.asia-southeast1.firebasedatabase.app/",
   authDomain: "quantumcode-me.firebaseapp.com",
   projectId: "quantumcode-me",
   storageBucket: "quantumcode-me.appspot.com",
@@ -222,13 +224,13 @@ auth.onAuthStateChanged(function (user) {
       UID: userUid,
       UserID: userID,
       Email: emailID,
-      College: collegeName.toLowerCase(),
+      College: collegeName,
     });
     setDoc(colRef1, {
       UID: userUid,
       UserID: userID,
       Email: emailID,
-      College: collegeName.toLowerCase(),
+      College: collegeName,
     });
 
     showUI(user);
