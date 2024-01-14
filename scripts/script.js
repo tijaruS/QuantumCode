@@ -30,8 +30,8 @@ const showUI = (user) => {
     // }
     //account info
     if (user.displayName === null) {
-      user.email = user.email.split("@")[0];
-      userName.textContent = `${user.email}`;
+      email = user.email.split("@")[0];
+      userName.textContent = `${email}`;
     } else {
       userName.textContent = `${user.displayName}`;
     }
@@ -62,9 +62,9 @@ const showProfile = (user) => {
     // userName.textContent = `${user.email}`;
 
     if (user.displayName === null) {
-      user.email = user.email.split("@")[0];
+      email = user.email.split("@")[0];
       if (profileName != undefined) {
-        profileName.textContent = `${user.email}`;
+        profileName.textContent = `${email}`;
       }
     } else {
       if (profileName != undefined) {

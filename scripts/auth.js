@@ -43,6 +43,7 @@ import {
   ref,
   getDatabase,
   set,
+  onValue,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
@@ -211,7 +212,7 @@ auth.onAuthStateChanged(function (user) {
     console.log("user is signed in");
     localStorage.setItem("userUid", user.uid);
 
-    // console.log(user);
+    console.log(user);
     // console.log(user.uid);
     const userUid = localStorage.getItem("userUid");
     const colRef1 = doc(db, "UserInfo", userUid);
@@ -220,18 +221,29 @@ auth.onAuthStateChanged(function (user) {
     const emailID = localStorage.getItem("emailID");
     const userID = localStorage.getItem("userID");
     // console.log(userUid, collegeName, emailID, userID);
-    set(ref(rdb, "users/" + userUid), {
-      UID: userUid,
-      UserID: userID,
-      Email: emailID,
-      College: collegeName,
+    const colDb = ref(rdb, "users/");
+    onValue(colDb, (snapshot) => {
+      snapshot.forEach((data) => {
+        let use = data.val();
+        if (use.email != user.email) {
+          set(ref(rdb, "users/" + user.uid), {
+            UID: user.uid,
+            UserID: userID,
+            Email: user.email,
+            College: collegeName,
+          });
+        } else {
+          return;
+        }
+      });
     });
-    setDoc(colRef1, {
-      UID: userUid,
-      UserID: userID,
-      Email: emailID,
-      College: collegeName,
-    });
+
+    // setDoc(colRef1, {
+    //   UID: userUid,
+    //   UserID: userID,
+    //   Email: emailID,
+    //   College: collegeName,
+    // });
 
     showUI(user);
 
