@@ -37,10 +37,15 @@ import {
   setDoc,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+import {
+  ref,
+  getDatabase,
+  set,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 // db.Settings({ timestampsInSnapshots: true });
-
+const rdb = getDatabase();
 //sign up
 
 export const signUpForm = document.querySelector("#signUpForm");
@@ -213,11 +218,17 @@ auth.onAuthStateChanged(function (user) {
     const emailID = localStorage.getItem("emailID");
     const userID = localStorage.getItem("userID");
     // console.log(userUid, collegeName, emailID, userID);
+    set(ref(rdb, "users/" + userUid), {
+      UID: userUid,
+      UserID: userID,
+      Email: emailID,
+      College: collegeName.toLowerCase(),
+    });
     setDoc(colRef1, {
       UID: userUid,
       UserID: userID,
       Email: emailID,
-      College: collegeName.toLocaleLowerCase(),
+      College: collegeName.toLowerCase(),
     });
 
     showUI(user);
