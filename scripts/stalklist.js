@@ -47,10 +47,10 @@ auth.onAuthStateChanged(function (user) {
     document.querySelector("#ifLoggedOut").style.display = "block";
   }
 });
-function deleteSomething(a, b, c) {
-  let docRef = doc(a, b, c);
-  deleteDoc(docRef);
-}
+// function deleteSomething(a, b, c) {
+//   let docRef = doc(a, b, c);
+//   deleteDoc(docRef);
+// }
 //firebase
 const colRef = collection(db, "StalkList");
 
