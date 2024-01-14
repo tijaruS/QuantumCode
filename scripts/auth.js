@@ -219,18 +219,28 @@ auth.onAuthStateChanged(function (user) {
 
     const collegeName = localStorage.getItem("collegeName");
     const emailID = localStorage.getItem("emailID");
-    const userID = localStorage.getItem("userID");
+    let userID = localStorage.getItem("userID");
     // console.log(userUid, collegeName, emailID, userID);
     const colDb = ref(rdb, "users/");
     onValue(colDb, (snapshot) => {
       snapshot.forEach((data) => {
         let use = data.val();
         if (use.email != user.email) {
+          if (userID === null) {
+            userID = user.displayName;
+          }
+          // if (user.photoURL === null) {
+          //   user.photoURL =
+          //     "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
+          // }
           set(ref(rdb, "users/" + user.uid), {
             UID: user.uid,
             UserID: userID,
             Email: user.email,
             College: collegeName,
+            profilePhoto:
+              user.photoURL ||
+              "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais",
           });
         } else {
           return;
@@ -271,15 +281,57 @@ const userUid = localStorage.getItem("userUid");
 const collegeName = localStorage.getItem("collegeName");
 const emailID = localStorage.getItem("emailID");
 const userID = localStorage.getItem("userID");
-if (
-  userUid != null ||
-  collegeName != null ||
-  emailID != null ||
-  userID != null
-) {
-  // console.log(userUid);
-  // console.log(collegeName);
-  // console.log(emailID);
-  // console.log(userID);
-}
+// if (
+//   userUid != null ||
+//   collegeName != null ||
+//   emailID != null ||
+//   userID != null
+// ) {
 // console.log(userUid);
+// console.log(collegeName);
+// console.log(emailID);
+// console.log(userID);
+// }
+// console.log(userUid);
+if (
+  window.location.pathname != "/signin.html" &&
+  window.location.pathname != "/signup.html"
+) {
+  const userListBtn = document.getElementById("userListBtn");
+  userListBtn.addEventListener("click", (e) => {
+    showUserList();
+  });
+}
+
+function showUserList() {
+  document.querySelector("#populateUserList").innerHTML = `
+  <div class="spinner-border text-primary mx-auto" role="status">
+</div>`;
+  let html = "";
+  const colDb = ref(rdb, "users/");
+  onValue(colDb, (snapshot) => {
+    snapshot.forEach((data) => {
+      let use = data.val();
+      // console.log(use);
+      html += `
+      <div style='display:flex;align-items:center;margin-bottom:10px'>
+       <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="${use.profilePhoto}"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName" style="margin-left:10px">
+                <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
+              </div>
+              <div class="ms-auto">
+                <button class="btn btn-primary">Add friend</button>
+              </div>
+      </div>
+      `;
+      document.querySelector("#populateUserList").innerHTML = html;
+    });
+  });
+}

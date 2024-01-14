@@ -129,9 +129,10 @@
             <a
               href="#"
               class="sub-menu-link mb-2"
+              id="userListBtn"
               data-bs-target="#userList"
               data-bs-toggle="modal"
-              ><i class="bi bi-card-checklist"></i>
+              ><i class="bi bi-people-fill"></i>
               <p>Users</p>
             </a>
             <a href="stalklist.html" class="sub-menu-link mb-2"
@@ -146,7 +147,6 @@
         </div>
       </div>
     </nav>
-    <!-- Modal -->
     <div
       class="modal fade"
       id="userList"
@@ -165,7 +165,32 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">...</div>
+          <div class="modal-body" id="modalBody">
+            <div
+              class="userProfile"
+              style="
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+              "
+              id="populateUserList"
+            >
+              <!-- <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName">
+                <h3 style="font-size: 20px; margin-top: 5px">UserName</h3>
+              </div>
+              <div class="ms-auto">
+                <button class="btn btn-primary">Add friend</button>
+              </div> -->
+            </div>
+          </div>
         </div>
       </div>
     </div>
