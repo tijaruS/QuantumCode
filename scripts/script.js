@@ -1,5 +1,3 @@
-// const e = require("cors");
-
 let subMenu = document.querySelector("#subMenu");
 function showMenu() {
   subMenu.classList.toggle("open-menu");
@@ -15,19 +13,6 @@ const profilePhoto3 = document.querySelector(".profile-photo");
 // const inputUserName = document.querySelector("#inputUserName");
 const showUI = (user) => {
   if (user) {
-    // if (user.displayName === null) {
-    //   user.email = user.email.split("@")[0];
-    //   profileName.textContent = `${user.email}`;
-    // } else {
-    //   profileName.textContent = `${user.displayName}`;
-    // }
-
-    // if (user.photoURL != null) {
-    //   profilePhoto3.src = `${user.photoURL}`;
-    // } else {
-    //   profilePhoto3.src =
-    //     "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
-    // }
     //account info
     if (user.displayName === null) {
       email = user.email.split("@")[0];
@@ -85,18 +70,3 @@ const showProfile = (user) => {
     }
   }
 };
-
-// const apiKey = "0990a51ea08fcdf4b7bab884402d3f064bb630c6";
-// const url = `https://codeforces.com/api/user.ratedList?activeOnly=true`;
-// let users = [];
-// fetch(url)
-//   .then((response) => response.json())
-//   .then((dataobj) => {
-//     console.log(dataobj);
-//   })
-//   .catch((error) => console.error(error));
-// const savedUsername = localStorage.getItem("username");
-// if (savedUsername) {
-//   // document.getElementById('alert-message1').classList.remove('d-none');
-//   usernameInput.value = savedUsername;
-// }

@@ -27,3 +27,14 @@ const analytics = getAnalytics(app);
 export const db = getFirestore(app);
 // db.settings({ timestampsInSnapshots: true });
 export const colRef = collection(db, "StalkList");
+
+function sendRequest(key) {
+  let notification = {
+    SendTo: key,
+    SendFrom: localStorage.getItem("userUid"),
+    name: localStorage.getItem("displayName"),
+    photoURL: localStorage.getItem("userPhotoUrl"),
+    date: new Date().toLocaleString(),
+  };
+  set(ref(rdb, "notifications/"), notification);
+}

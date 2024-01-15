@@ -1,13 +1,31 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-// import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
 import {
   getAuth,
   GoogleAuthProvider,
   signInWithPopup,
-  signInWithRedirect,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  doc,
+  deleteDoc,
+  getDoc,
+  setDoc,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
+  ref,
+  getDatabase,
+  set,
+  onValue,
+  push,
+  query,
+  orderByChild,
+  equalTo,
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDUK2UwEJM5lITO9inXtVT8rkEwBtvhuCY",
@@ -29,27 +47,9 @@ export const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 //firebase
 
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  getDoc,
-  setDoc,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-import {
-  ref,
-  getDatabase,
-  set,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 // db.Settings({ timestampsInSnapshots: true });
-const rdb = getDatabase();
+export const rdb = getDatabase();
 //sign up
 
 export const signUpForm = document.querySelector("#signUpForm");
@@ -68,21 +68,6 @@ if (signUpForm != null) {
       const signUpButton = document.querySelector("#signUpButton");
       signUpButton.disabled = false;
       document.querySelector("#passwordMismatch").style.display = "none";
-      // signUpForm.addEventListener("submit", (e) => {
-      //   e.preventDefault();
-      //   const college = signUpForm["floatingCollegeName"].value;
-      //   const email = signUpForm["floatingInput"].value;
-      //   const UserName = signUpForm["floatingUserName"].value;
-      //   const password = signUpForm["floatingPassword"].value;
-      //   const confirmPassword = signUpForm["floatingConfirmPassword"].value;
-      //   signUpButton.innerHTML = "Signing Up...";
-      //   addDoc(colRef1, {
-      //     UserID: UserName,
-      //     Email: email,
-      //     College: college,
-      //   });
-      // });
-
       signUpForm.addEventListener("submit", (e) => {
         e.preventDefault();
         const college = signUpForm["floatingCollegeName"].value;
@@ -201,6 +186,8 @@ if (
         localStorage.removeItem("userID");
         localStorage.removeItem("emailID");
         localStorage.removeItem("userEmail");
+        localStorage.removeItem("displayName");
+        localStorage.removeItem("userPhotoUrl");
       })
       .catch((error) => {
         // An error happened.
@@ -214,6 +201,8 @@ auth.onAuthStateChanged(function (user) {
     console.log("user is signed in");
     localStorage.setItem("userUid", user.uid);
     localStorage.setItem("userEmail", user.email);
+    localStorage.setItem("userPhotoUrl", user.photoURL);
+    localStorage.setItem("displayName", user.displayName);
 
     console.log(user);
     // console.log(user.uid);
@@ -261,10 +250,7 @@ auth.onAuthStateChanged(function (user) {
     showUI(user);
 
     showProfile(user);
-
-    // const pastContests = document.querySelector("#pastContests");
-    // pastContests.style.display = "block";
-    // document.querySelector("#text").style.display = "none";
+    notificationCount();
   } else {
     if (window.location.pathname === "/signin.html") {
       return;
@@ -274,28 +260,16 @@ auth.onAuthStateChanged(function (user) {
       showUI();
     }
     showProfile();
-
-    // const pastContests = document.querySelector("#pastContests");
-    // pastContests.style.display = "none";
-    // document.querySelector("#text").style.display = "block";
   }
 });
 const userUid = localStorage.getItem("userUid");
 const collegeName = localStorage.getItem("collegeName");
 const emailID = localStorage.getItem("emailID");
 const userID = localStorage.getItem("userID");
-// if (
-//   userUid != null ||
-//   collegeName != null ||
-//   emailID != null ||
-//   userID != null
-// ) {
-// console.log(userUid);
-// console.log(collegeName);
-// console.log(emailID);
-// console.log(userID);
-// }
-// console.log(userUid);
+const firebaseDisplayName = localStorage.getItem("displayName");
+const firebaseUserPhotoUrl = localStorage.getItem("userPhotoUrl");
+console.log(userUid, collegeName, emailID, userID, firebaseDisplayName);
+
 if (
   window.location.pathname != "/signin.html" &&
   window.location.pathname != "/signup.html"
@@ -305,25 +279,56 @@ if (
     showUserList();
   });
 }
+if (
+  window.location.pathname != "/signin.html" &&
+  window.location.pathname != "/signup.html" &&
+  window.location.pathname != "/stalklist.html" &&
+  window.location.pathname != "/contest.html" &&
+  window.location.pathname != "/search.html"
+) {
+  const firendListBtn = document.getElementById("firendListBtn");
+  firendListBtn.addEventListener("click", (e) => {
+    showFriendList();
+  });
+}
 const currnetUserEmail = localStorage.getItem("userEmail");
 // console.log(currnetUserEmail);
+// console.log(localStorage.getItem("userUid"));
 function showUserList() {
-  document.querySelector("#populateUserList").innerHTML = `
-  <div class="spinner-border text-primary mx-auto" role="status">
-</div>`;
   let html = "";
   const colDb = ref(rdb, "users/");
+  const notificationRef = ref(rdb, "notifications/");
+  // let notificationRef = firebase.database().ref("notifications");
   onValue(colDb, (snapshot) => {
     if (snapshot.hasChildren()) {
       html = `<form class="d-flex mb-2" role="search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       </form>`;
+      document.querySelector("#populateUserList").innerHTML = html;
     }
+
     snapshot.forEach((data) => {
       let use = data.val();
       // console.log(use.email);
+
+      const q = query(
+        notificationRef,
+        orderByChild("SendTo"),
+        equalTo(data.key)
+      );
+
       if (use.Email != currnetUserEmail) {
-        html += `
+        onValue(q, (snapshot) => {
+          const val = snapshot.val();
+          // console.log(snapshot.val());
+          // console.log(val);
+          // console.log(Object.values(snapshot.val()).length);
+
+          if (
+            snapshot.size > 0 &&
+            Object.values(val)[0].SendFrom === localStorage.getItem("userUid")
+          ) {
+            html = `
       <div style='display:flex;align-items:center;margin-bottom:10px'>
        <div class="userDP">
                 <img
@@ -337,16 +342,102 @@ function showUserList() {
                 <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
               </div>
               <div class="ms-auto">
-                <button class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+                <button class="btn btn-default" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+</svg>Sent</button>
+              </div>
+      </div>
+      `;
+            document.querySelector("#populateUserList").innerHTML += html;
+          } else {
+            html = `
+      <div style='display:flex;align-items:center;margin-bottom:10px'>
+       <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="${use.profilePhoto}"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName" style="margin-left:10px">
+                <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
+              </div>
+              <div class="ms-auto">
+                <button class="btn btn-primary addFriendBtn" data-key='${data.key}'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
 </svg>Add friend</button>
               </div>
       </div>
       `;
-      }
+            document.querySelector("#populateUserList").innerHTML += html;
+            let buttons = document.querySelectorAll(".addFriendBtn");
 
-      document.querySelector("#populateUserList").innerHTML = html;
+            buttons.forEach((button) => {
+              button.addEventListener("click", function () {
+                // Retrieve the data-key value and pass it to sendAddFriendReq
+                let key = this.getAttribute("data-key");
+                sendAddFriendReq(key);
+                console.log(key);
+                window.location.reload();
+              });
+            });
+          }
+        });
+        //         html += `
+        //       <div style='display:flex;align-items:center;margin-bottom:10px'>
+        //        <div class="userDP">
+        //                 <img
+        //                   class="rounded-5"
+        //                   src="${use.profilePhoto}"
+        //                   alt=""
+        //                   height="40px"
+        //                 />
+        //               </div>
+        //               <div class="userProfileName" style="margin-left:10px">
+        //                 <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
+        //               </div>
+        //               <div class="ms-auto">
+        //                 <button class="btn btn-primary addFriendBtn" data-key='${data.key}'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+        //   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+        //   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+        // </svg>Add friend</button>
+        //               </div>
+        //       </div>
+        //       `;
+      }
     });
   });
+}
+
+function sendAddFriendReq(key) {
+  let notification = {
+    SendTo: key,
+    SendFrom: localStorage.getItem("userUid"),
+    name: localStorage.getItem("displayName"),
+    photoURL: localStorage.getItem("userPhotoUrl"),
+    date: new Date().toLocaleString(),
+  };
+  push(ref(rdb, "notifications/"), notification);
+}
+
+function notificationCount() {
+  let dbRef = ref(rdb, "notifications/");
+  const q = query(
+    dbRef,
+    orderByChild("SendTo"),
+    equalTo(localStorage.getItem("userUid"))
+  );
+  onValue(q, (snapshot) => {
+    const count = snapshot.size;
+    const notificationElement = document.querySelector("#notification");
+    if (notificationElement) {
+      notificationElement.innerHTML = count;
+    }
+  });
+  // if (document.querySelector("#notification") != null) {
+  //   document.querySelector("#notification").innerHTML = count;
+  // }
 }
