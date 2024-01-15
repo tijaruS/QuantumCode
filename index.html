@@ -104,7 +104,13 @@
             </li>
           </ul>
         </div>
-        <a href="" id="showWhenLoggedIn" style="display: none" class="me-5"
+        <a
+          href=""
+          id="showWhenLoggedIn"
+          style="display: none"
+          class="me-5 notificationBtn"
+          data-bs-target="#notificationList"
+          data-bs-toggle="modal"
           ><svg
             xmlns="http://www.w3.org/2000/svg"
             width="25"
@@ -263,6 +269,55 @@
                 flex-direction: column;
               "
               id="populateUserList"
+            >
+              <!-- <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName">
+                <h3 style="font-size: 20px; margin-top: 5px">UserName</h3>
+              </div>
+              <div class="ms-auto">
+                <button class="btn btn-primary">Add friend</button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--modal-->
+    <!--User Modal -->
+    <div
+      class="modal fade"
+      id="notificationList"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">User List</h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body" id="modalBody">
+            <div
+              class="userProfile"
+              style="
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+              "
+              id="populateNotificationList"
             >
               <!-- <div class="userDP">
                 <img
