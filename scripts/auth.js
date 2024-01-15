@@ -25,6 +25,9 @@ import {
   query,
   orderByChild,
   equalTo,
+  child,
+  update,
+  get,
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 const firebaseConfig = {
@@ -425,23 +428,42 @@ function sendAddFriendReq(key) {
 }
 
 function notificationCount() {
-  let dbRef = ref(rdb, "notifications/");
-  const q = query(
-    dbRef,
+  const db = getDatabase();
+  const notiRef = query(
+    ref(db, "notifications/"),
     orderByChild("SendTo"),
     equalTo(localStorage.getItem("userUid"))
   );
-  onValue(q, (snapshot) => {
-    const count = snapshot.size;
-    const notificationElement = document.querySelector("#notification");
-    if (notificationElement) {
-      notificationElement.innerHTML = count;
+
+  onValue(notiRef, (snapshot) => {
+    if (snapshot.exists()) {
+      let notiArray = Object.values(snapshot.val()).filter(
+        (n) => n.status === "pending"
+      );
+      document.getElementById("notification").innerHTML = notiArray.length;
+    } else {
+      console.log("No data available");
     }
   });
-  // if (document.querySelector("#notification") != null) {
-  //   document.querySelector("#notification").innerHTML = count;
-  // }
 }
+// function notificationCount() {
+//   let dbRef = ref(rdb, "notifications/");
+//   const q = query(
+//     dbRef,
+//     orderByChild("SendTo"),
+//     equalTo(localStorage.getItem("userUid"))
+//   );
+//   onValue(q, (snapshot) => {
+//     const count = snapshot.size;
+//     const notificationElement = document.querySelector("#notification");
+//     if (notificationElement) {
+//       notificationElement.innerHTML = count;
+//     }
+//   });
+//   // if (document.querySelector("#notification") != null) {
+//   //   document.querySelector("#notification").innerHTML = count;
+//   // }
+// }
 
 if (
   window.location.pathname != "/signin.html" &&
@@ -480,8 +502,8 @@ function populateNotificationList() {
       // console.log(snapshot.val());
       // console.log(val);
       // console.log(Object.values(snapshot.val()).length);
-
-      html += `
+      if (use.status === "pending") {
+        html += `
       <div style='display:flex;align-items:center;margin-bottom:10px'>
        <div class="userDP">
                 <img
@@ -495,11 +517,11 @@ function populateNotificationList() {
                 <h3 style="font-size: 20px; margin-top: 5px">${use.name}</h3>
               </div>
               <div class="ms-auto">
-              <button class="btn btn-success" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16">
+              <button class="btn btn-success" id='acceptBtn' data-key='${data.key}' ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-check" viewBox="0 0 16 16">
   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
 </svg>Accept</button>
-              <button class="btn btn-danger" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16">
+              <button class="btn btn-danger" id='rejectBtn' data-key='${data.key}')"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-x" viewBox="0 0 16 16">
   <path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0m-9 8c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m-.646-4.854.646.647.646-.647a.5.5 0 0 1 .708.708l-.647.646.647.646a.5.5 0 0 1-.708.708l-.646-.647-.646.647a.5.5 0 0 1-.708-.708l.647-.646-.647-.646a.5.5 0 0 1 .708-.708"/>
 </svg>Reject</button>
@@ -507,7 +529,138 @@ function populateNotificationList() {
               </div>
       </div>
       `;
+      }
       document.querySelector("#populateNotificationList").innerHTML = html;
+      let rejectButtons = document.querySelectorAll("#rejectBtn");
+      let acceptButtons = document.querySelectorAll("#acceptBtn");
+
+      rejectButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          // Retrieve the data-key value and pass it to sendAddFriendReq
+          let key = this.getAttribute("data-key");
+          Reject(key);
+          console.log(key);
+          window.location.reload();
+        });
+      });
+      acceptButtons.forEach((button) => {
+        button.addEventListener("click", function () {
+          // Retrieve the data-key value and pass it to sendAddFriendReq
+          let key = this.getAttribute("data-key");
+          Accept(key);
+          console.log(key);
+          window.location.reload();
+        });
+      });
+    });
+  });
+}
+
+function Reject(key) {
+  const db = getDatabase();
+  const notiRef = ref(db, "notifications/" + key);
+
+  get(notiRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        let obj = snapshot.val();
+        obj.status = "Reject";
+
+        update(notiRef, obj)
+          .then(() => {
+            // do something
+            populateNotificationList();
+          })
+          .catch((error) => {
+            alert(error);
+          });
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function Accept(key) {
+  const db = getDatabase();
+  const notiRef = ref(db, "notifications/" + key);
+
+  get(notiRef)
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        let obj = snapshot.val();
+        obj.status = "accept";
+
+        update(notiRef, obj);
+        const friendListRef = ref(db, "friendlist");
+
+        push(friendListRef, {
+          friendId: obj.SendFrom,
+          userId: obj.SendTo,
+        })
+          .then((snapshot) => {
+            // The unique key is available as snapshot.key
+            // console.log("Unique key: ", snapshot.key);
+          })
+          .catch((error) => {
+            console.error("Error: ", error);
+          });
+
+        // do something
+        populateNotificationList();
+      } else {
+        console.log("No data available");
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+function showFriendList() {
+  const db = getDatabase();
+  const friendListRef = ref(db, "friendlist");
+
+  onValue(friendListRef, (snapshot) => {
+    document.getElementById(
+      "populateFriendList"
+    ).innerHTML = `<li class="list-group-item" style="background-color:#f8f8f8;">
+                            <input type="text" placeholder="Search" class="form-control form-rounded" />
+                        </li>`;
+    snapshot.forEach((childSnapshot) => {
+      let lst = childSnapshot.val();
+      let friendKey = "";
+      if (lst.friendId === localStorage.getItem("userUid")) {
+        friendKey = lst.userId;
+      } else if (lst.userId === localStorage.getItem("userUid")) {
+        friendKey = lst.friendId;
+      }
+
+      if (friendKey !== "") {
+        const userRef = ref(db, "users/" + friendKey);
+        onValue(userRef, (userSnapshot) => {
+          let user = userSnapshot.val();
+          document.getElementById(
+            "populateFriendList"
+          ).innerHTML += ` <div style='display:flex;align-items:center;margin-bottom:10px'>
+       <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="${user.profilePhoto}"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName" style="margin-left:10px">
+                <h3 style="font-size: 20px; margin-top: 5px">${user.UserID}</h3>
+              </div>
+              
+      </div>
+      `;
+        });
+      }
     });
   });
 }
