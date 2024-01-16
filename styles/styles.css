@@ -304,7 +304,7 @@
   background-image: url("/assets/24600855_sl_031420_28950_10.jpg");
   background-size: cover;
   padding-bottom: 200px;
-
+  transition: background-image 0.5s ease-in-out;
   position: relative;
 }
 .sometext {
