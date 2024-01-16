@@ -347,3 +347,53 @@
 
   color: #000000 !important;
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-60px);
+  }
+  60% {
+    transform: translateY(-30px);
+  }
+}
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.text {
+  animation: bounce 2s ease-in-out forwards;
+}
+.sometext {
+  animation: slideInRight 1s ease-in-out forwards;
+}
+.video {
+  opacity: 0;
+  animation: fadeIn 3s ease-in-out forwards;
+}
