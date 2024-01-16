@@ -29,199 +29,207 @@
     <!-- <script src="./scripts/index.js" type="module" defer></script> -->
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg bg-transparent shadow-sm">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img
-            src="/assets/Minimalist Digital Service Developer Logo.png"
-            alt="Logo"
-            width="32"
-            height="32"
-            class="d-inline-block align-text-top"
-          />QuantumCode
-        </a>
+    <div class="background">
+      <nav class="navbar navbar-expand-lg bg-transparent shadow-sm">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <img
+              src="/assets/Minimalist Digital Service Developer Logo.png"
+              alt="Logo"
+              width="32"
+              height="32"
+              class="d-inline-block align-text-top"
+            />QuantumCode
+          </a>
 
-        <button
-          class="navbar-toggler shadow-none border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"
-                >Home</a
-              >
-            </li>
-            <!-- <li class="nav-item">
+          <button
+            class="navbar-toggler shadow-none border-0"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Home</a
+                >
+              </li>
+              <!-- <li class="nav-item">
               <a class="nav-link" href="problems.html">Problems</a>
             </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="contest.html">Contest</a>
-            </li>
-            <!-- <li class="nav-item">
+              <li class="nav-item">
+                <a class="nav-link" href="contest.html">Contest</a>
+              </li>
+              <!-- <li class="nav-item">
               <a class="nav-link" href="discuss.html">Discuss</a>
             </li> -->
-            <li class="nav-item">
-              <a class="nav-link" href="search.html">Search</a>
-            </li>
-            <!-- <li class="nav-item">
+              <li class="nav-item">
+                <a class="nav-link" href="search.html">Search</a>
+              </li>
+              <!-- <li class="nav-item">
               <a class="nav-link" href="users.html">Users</a>
             </li> -->
-          </ul>
+            </ul>
 
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a
-                class="btn btn-outline-dark rounded-5"
-                href="signup.html"
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a
+                  class="btn btn-outline-primary rounded-5"
+                  href="signup.html"
+                  id="showWhenLoggedOut"
+                  style="display: none"
+                  >Sign Up</a
+                >
+              </li>
+              <li
+                class="nav-item nav-link"
                 id="showWhenLoggedOut"
                 style="display: none"
-                >Sign Up</a
               >
-            </li>
-            <li
-              class="nav-item nav-link"
-              id="showWhenLoggedOut"
-              style="display: none"
+                Or
+              </li>
+              <li class="nav-item">
+                <a
+                  class="btn btn-outline-primary rounded-5"
+                  href="signin.html"
+                  id="showWhenLoggedOut"
+                  style="display: none"
+                  >Sign in</a
+                >
+              </li>
+            </ul>
+          </div>
+          <a
+            href=""
+            id="showWhenLoggedIn"
+            style="display: none"
+            class="me-5 notificationBtn"
+            data-bs-target="#notificationList"
+            data-bs-toggle="modal"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="25"
+              height="25"
+              class="bi bi-bell"
+              viewBox="0 0 16 16"
+              fill="white"
             >
-              Or
-            </li>
-            <li class="nav-item">
-              <a
-                class="btn btn-outline-dark rounded-5"
-                href="signin.html"
-                id="showWhenLoggedOut"
-                style="display: none"
-                >Sign in</a
-              >
-            </li>
-          </ul>
-        </div>
-        <a
-          href=""
-          id="showWhenLoggedIn"
-          style="display: none"
-          class="me-5 notificationBtn"
-          data-bs-target="#notificationList"
-          data-bs-toggle="modal"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="25"
-            height="25"
-            class="bi bi-bell"
-            viewBox="0 0 16 16"
+              <path
+                fill="white"
+                d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"
+              /></svg
+            ><span
+              id="notification"
+              style="
+                background-color: red;
+                border-radius: 50%;
+                color: white;
+                position: absolute;
+                margin-top: -5px;
+                margin-left: -12px;
+                padding-left: 7px;
+                font-size: 12px;
+                padding-right: 7px;
+                border: 2px solid white;
+              "
+              >0</span
+            ></a
           >
-            <path
-              d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"
-            /></svg
-          ><span
-            id="notification"
+          <img
+            src="./assets/Minimalist Digital Service Developer Logo (1).png"
+            alt=""
+            class="user-pic avatar1"
+            id="showWhenLoggedIn"
+            onclick="showMenu()"
             style="
-              background-color: red;
-              border-radius: 50%;
-              color: white;
-              position: absolute;
-              margin-top: -5px;
-              margin-left: -12px;
-              padding-left: 7px;
-              font-size: 12px;
-              padding-right: 7px;
-              border: 2px solid white;
+              display: none;
+              box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.2);
             "
-            >0</span
-          ></a
-        >
-        <img
-          src="./assets/Minimalist Digital Service Developer Logo (1).png"
-          alt=""
-          class="user-pic avatar1"
-          id="showWhenLoggedIn"
-          onclick="showMenu()"
-          style="display: none"
-        />
-        <div class="sub-menu-wrap" id="subMenu">
-          <div class="sub-menu">
-            <div class="user-info">
-              <img
-                src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
-                alt=""
-                class="avatar2"
-              />
+          />
+          <div class="sub-menu-wrap" id="subMenu">
+            <div class="sub-menu">
+              <div class="user-info">
+                <img
+                  src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
+                  alt=""
+                  class="avatar2"
+                />
+                <a
+                  class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                  href="profile.html"
+                  ><h3 id="user-name"></h3
+                ></a>
+              </div>
+              <hr />
               <a
-                class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                href="profile.html"
-                ><h3 id="user-name"></h3
-              ></a>
+                href="#"
+                class="sub-menu-link mb-2"
+                id="firendListBtn"
+                data-bs-target="#friendList"
+                data-bs-toggle="modal"
+                ><i class="bi bi-people"></i>
+                <p>Friends</p>
+              </a>
+              <a
+                href="#"
+                class="sub-menu-link mb-2"
+                id="userListBtn"
+                data-bs-target="#userList"
+                data-bs-toggle="modal"
+                ><i class="bi bi-people-fill"></i>
+                <p>Users</p>
+              </a>
+              <a href="stalklist.html" class="sub-menu-link mb-2"
+                ><i class="bi bi-card-checklist"></i>
+                <p>Stalklist</p>
+              </a>
+              <a href="#" class="sub-menu-link" id="signOut"
+                ><i class="bi bi-box-arrow-left"></i>
+                <p>Sign Out</p>
+              </a>
             </div>
-            <hr />
-            <a
-              href="#"
-              class="sub-menu-link mb-2"
-              id="firendListBtn"
-              data-bs-target="#friendList"
-              data-bs-toggle="modal"
-              ><i class="bi bi-people"></i>
-              <p>Friends</p>
-            </a>
-            <a
-              href="#"
-              class="sub-menu-link mb-2"
-              id="userListBtn"
-              data-bs-target="#userList"
-              data-bs-toggle="modal"
-              ><i class="bi bi-people-fill"></i>
-              <p>Users</p>
-            </a>
-            <a href="stalklist.html" class="sub-menu-link mb-2"
-              ><i class="bi bi-card-checklist"></i>
-              <p>Stalklist</p>
-            </a>
-            <a href="#" class="sub-menu-link" id="signOut"
-              ><i class="bi bi-box-arrow-left"></i>
-              <p>Sign Out</p>
-            </a>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
-    <!-- Friend Modal -->
-    <div
-      class="modal fade"
-      id="friendList"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">Friend List</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body" id="modalBody">
-            <div
-              class="userProfile"
-              style="
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-              "
-              id="populateFriendList"
-            >
-              <!-- <div class="userDP">
+      <!-- Friend Modal -->
+      <div
+        class="modal fade"
+        id="friendList"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Friend List
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+              <div
+                class="userProfile"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                "
+                id="populateFriendList"
+              >
+                <!-- <div class="userDP">
                 <img
                   class="rounded-5"
                   src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
@@ -235,42 +243,42 @@
               <div class="ms-auto">
                 <button class="btn btn-primary">Add friend</button>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--Friend Modal -->
-    <!--User Modal -->
-    <div
-      class="modal fade"
-      id="userList"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">User List</h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body" id="modalBody">
-            <div
-              class="userProfile"
-              style="
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-              "
-              id="populateUserList"
-            >
-              <!-- <div class="userDP">
+      <!--Friend Modal -->
+      <!--User Modal -->
+      <div
+        class="modal fade"
+        id="userList"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">User List</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+              <div
+                class="userProfile"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                "
+                id="populateUserList"
+              >
+                <!-- <div class="userDP">
                 <img
                   class="rounded-5"
                   src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
@@ -284,44 +292,44 @@
               <div class="ms-auto">
                 <button class="btn btn-primary">Add friend</button>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!--User Modal-->
-    <!--Notification Modal -->
-    <div
-      class="modal fade"
-      id="notificationList"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="exampleModalLabel">
-              Notification List
-            </h1>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body" id="modalBody">
-            <div
-              class="userProfile"
-              style="
-                display: flex;
-                justify-content: center;
-                flex-direction: column;
-              "
-              id="populateNotificationList"
-            >
-              <!-- <div class="userDP">
+      <!--User Modal-->
+      <!--Notification Modal -->
+      <div
+        class="modal fade"
+        id="notificationList"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Notification List
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+              <div
+                class="userProfile"
+                style="
+                  display: flex;
+                  justify-content: center;
+                  flex-direction: column;
+                "
+                id="populateNotificationList"
+              >
+                <!-- <div class="userDP">
                 <img
                   class="rounded-5"
                   src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais"
@@ -335,13 +343,96 @@
               <div class="ms-auto">
                 <button class="btn btn-primary">Add friend</button>
               </div> -->
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <!-- <div class="absolute">
+        <div class="absolute inset-0 center">
+          <div class="bg-shape1 bg-teal opacity-50 bg-blur"></div>
+          <div class="bg-shape2 bg-primary opacity-50 bg-blur"></div>
+          <div class="bg-shape1 bg-purple opacity-50 bg-blur"></div>
+        </div>
+      </div> -->
+
+      <!--Notification Modal-->
+      <!-- content -->
+      <h1 style="justify-content: center; display: flex"></h1>
+      <section class="">
+        <div class="container">
+          <div class="d-flex">
+            <div class="image col-6">
+              <video
+                src="./assets/hero.mp4"
+                loop
+                autoplay
+                muted
+                class="video"
+              ></video>
+            </div>
+            <div class="sometext col-6 ms-5">
+              <h2>Welcome to QuantumCode: Your Portal to Coding Excellence!</h2>
+              <h4>Elevate Your Coding Experience</h4>
+              <p>
+                Dive into the world of QuantumCode, where innovation meets
+                expertise, and coding becomes an extraordinary journey. Our
+                platform is designed to empower coders of all levels, providing
+                an immersive experience that goes beyond traditional coding
+                environments.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="custom-shape-divider-bottom-1705423967">
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z"
+            opacity=".25"
+            class="shape-fill"
+          ></path>
+          <path
+            d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z"
+            opacity=".5"
+            class="shape-fill"
+          ></path>
+          <path
+            d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z"
+            class="shape-fill"
+          ></path>
+        </svg>
+      </div>
     </div>
-    <!--Notification Modal-->
-    <h1 style="justify-content: center; display: flex"></h1>
+    <div class="container mt-5 mb-5">
+      <h1 style="text-align: center">What Sets Us Apart?</h1>
+      <div class="d-flex">
+        <div>
+          <h2>Upcoming Contest Preview:</h2>
+          <p>
+            Stay ahead of the curve with our exclusive feature that gives you a
+            sneak peek into upcoming coding contests. Prepare yourself for the
+            challenges ahead and sharpen your skills in advance.
+          </p>
+          <a href="contest.html" class="btn btn-primary">View Contest</a>
+        </div>
+        <div>
+          <h2>User Search and Friend Add:</h2>
+          <p>
+            Connect with fellow coders effortlessly. QuantumCode makes it simple
+            to find and add friends who share your passion for coding. Build
+            your coding network and collaborate on projects seamlessly.
+          </p>
+          <a href="search.html" class="btn btn-primary">View Search</a>
+        </div>
+      </div>
+    </div>
+    <!-- content -->
     <!-- footer -->
 
     <!-- footer -->

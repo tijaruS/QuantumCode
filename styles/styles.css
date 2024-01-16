@@ -288,3 +288,62 @@
   flex-wrap: wrap;
   row-gap: 10px;
 }
+
+.bg-color {
+  background-color: rgb(42, 46, 46);
+}
+
+.video {
+  width: 100%;
+
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+.background {
+  background-image: url("/assets/24600855_sl_031420_28950_10.jpg");
+  background-size: cover;
+  padding-bottom: 200px;
+
+  position: relative;
+}
+.sometext {
+  color: white;
+}
+.background .nav-link {
+  color: white !important;
+}
+
+.background .navbar-brand {
+  color: white !important;
+}
+
+.custom-shape-divider-bottom-1705423967 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1705423967 svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 155px;
+}
+
+.custom-shape-divider-bottom-1705423967 .shape-fill {
+  fill: #ffffff;
+}
+
+.active {
+  font-weight: 700 !important;
+}
+.nav-link:hover {
+  background-color: rgb(22, 169, 238);
+
+  color: #000000 !important;
+}
