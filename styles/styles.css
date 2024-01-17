@@ -442,3 +442,7 @@
   transition: background-image 0.5s ease-in-out;
   padding-bottom: 100px;
 }
+
+.navbar-toggler-icon {
+  color: white !important;
+}
