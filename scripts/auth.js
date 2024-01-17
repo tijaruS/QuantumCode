@@ -318,6 +318,11 @@ function showUserList() {
         equalTo(data.key)
       );
 
+      const qt = query(
+        notificationRef,
+        orderByChild("SendFrom"),
+        equalTo(data.key)
+      );
       if (use.Email != currnetUserEmail) {
         onValue(q, (snapshot) => {
           const val = snapshot.val();
@@ -346,13 +351,43 @@ function showUserList() {
                 <button class="btn btn-default" ><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-</svg>Pending</button>
+</svg>Sent</button>
               </div>
       </div>
       `;
             document.querySelector("#populateUserList").innerHTML += html;
           } else {
-            html = `
+            onValue(qt, (snapshot) => {
+              const valt = snapshot.val();
+              if (
+                snapshot.size > 0 &&
+                Object.values(valt)[0].SendTo ===
+                  localStorage.getItem("userUid")
+              ) {
+                html = `
+      <div style='display:flex;align-items:center;margin-bottom:10px'>
+       <div class="userDP">
+                <img
+                  class="rounded-5"
+                  src="${use.profilePhoto}"
+                  alt=""
+                  height="40px"
+                />
+              </div>
+              <div class="userProfileName" style="margin-left:10px">
+                <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
+              </div>
+              <div class="ms-auto">
+                <button class="btn btn-default"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+</svg>Pending</button>
+              </div>
+      </div>
+      `;
+                document.querySelector("#populateUserList").innerHTML += html;
+              } else {
+                html = `
       <div style='display:flex;align-items:center;margin-bottom:10px'>
        <div class="userDP">
                 <img
@@ -367,47 +402,50 @@ function showUserList() {
               </div>
               <div class="ms-auto">
                 <button class="btn btn-primary addFriendBtn" data-key='${data.key}'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-  <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-</svg>Add friend</button>
-              </div>
-      </div>
+              <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+              <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+            </svg>Add friend</button>
+                          </div>
+                  </div>
       `;
-            document.querySelector("#populateUserList").innerHTML += html;
-            let buttons = document.querySelectorAll(".addFriendBtn");
+                document.querySelector("#populateUserList").innerHTML += html;
 
-            buttons.forEach((button) => {
-              button.addEventListener("click", function () {
-                // Retrieve the data-key value and pass it to sendAddFriendReq
-                let key = this.getAttribute("data-key");
-                sendAddFriendReq(key);
-                console.log(key);
-                window.location.reload();
-              });
+                let buttons = document.querySelectorAll(".addFriendBtn");
+
+                buttons.forEach((button) => {
+                  button.addEventListener("click", function () {
+                    // Retrieve the data-key value and pass it to sendAddFriendReq
+                    let key = this.getAttribute("data-key");
+                    sendAddFriendReq(key);
+                    console.log(key);
+                    window.location.reload();
+                  });
+                });
+              }
             });
+            //         html += `
+            //       <div style='display:flex;align-items:center;margin-bottom:10px'>
+            //        <div class="userDP">
+            //                 <img
+            //                   class="rounded-5"
+            //                   src="${use.profilePhoto}"
+            //                   alt=""
+            //                   height="40px"
+            //                 />
+            //               </div>
+            //               <div class="userProfileName" style="margin-left:10px">
+            //                 <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
+            //               </div>
+            //               <div class="ms-auto">
+            //                 <button class="btn btn-primary addFriendBtn" data-key='${data.key}'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
+            //   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
+            //   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
+            // </svg>Add friend</button>
+            //               </div>
+            //       </div>
+            //       `;
           }
         });
-        //         html += `
-        //       <div style='display:flex;align-items:center;margin-bottom:10px'>
-        //        <div class="userDP">
-        //                 <img
-        //                   class="rounded-5"
-        //                   src="${use.profilePhoto}"
-        //                   alt=""
-        //                   height="40px"
-        //                 />
-        //               </div>
-        //               <div class="userProfileName" style="margin-left:10px">
-        //                 <h3 style="font-size: 20px; margin-top: 5px">${use.UserID}</h3>
-        //               </div>
-        //               <div class="ms-auto">
-        //                 <button class="btn btn-primary addFriendBtn" data-key='${data.key}'><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-fill-add" viewBox="0 0 16 16">
-        //   <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"/>
-        //   <path d="M2 13c0 1 1 1 1 1h5.256A4.5 4.5 0 0 1 8 12.5a4.5 4.5 0 0 1 1.544-3.393Q8.844 9.002 8 9c-5 0-6 3-6 4"/>
-        // </svg>Add friend</button>
-        //               </div>
-        //       </div>
-        //       `;
       }
     });
   });
