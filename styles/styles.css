@@ -446,3 +446,6 @@
 .navbar-toggler-icon {
   color: white !important;
 }
+.navbar-brand:hover {
+  font-weight: 900 !important;
+}
