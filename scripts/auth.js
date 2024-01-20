@@ -212,35 +212,46 @@ auth.onAuthStateChanged(function (user) {
     const userUid = localStorage.getItem("userUid");
     const colRef1 = doc(db, "UserInfo", userUid);
 
-    const collegeName = localStorage.getItem("collegeName");
+    let collegeName = localStorage.getItem("collegeName");
+
     const emailID = localStorage.getItem("emailID");
     let userID = localStorage.getItem("userID");
-    // console.log(userUid, collegeName, emailID, userID);
+    console.log(userUid, collegeName, emailID, userID);
     const colDb = ref(rdb, "users/");
     onValue(colDb, (snapshot) => {
+      let userExist = false;
       snapshot.forEach((data) => {
         let use = data.val();
-        if (use.email != user.email) {
-          if (userID === null) {
-            userID = user.displayName;
-          }
-          // if (user.photoURL === null) {
-          //   user.photoURL =
-          //     "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
-          // }
-          set(ref(rdb, "users/" + user.uid), {
-            UID: user.uid,
-            UserID: userID,
-            Email: user.email,
-            College: collegeName,
-            profilePhoto:
-              user.photoURL ||
-              "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais",
-          });
-        } else {
-          return;
+        if (use.UID === user.uid) {
+          userExist = true;
+          return true;
         }
       });
+      if (!userExist) {
+        if (userID === null) {
+          if (user.displayName === null) {
+            userID = user.email.split("@")[0];
+          } else {
+            userID = user.displayName;
+          }
+        }
+        if (collegeName === null) {
+          collegeName = "Not Available";
+        }
+        // if (user.photoURL === null) {
+        //   user.photoURL =
+        //     "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais";
+        // }
+        set(ref(rdb, "users/" + user.uid), {
+          UID: user.uid,
+          UserID: userID,
+          Email: user.email,
+          College: collegeName,
+          profilePhoto:
+            user.photoURL ||
+            "https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-541.jpg?size=338&ext=jpg&ga=GA1.1.1546980028.1704153600&semt=ais",
+        });
+      }
     });
 
     // setDoc(colRef1, {
