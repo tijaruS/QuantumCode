@@ -175,7 +175,14 @@
     <!-- <script src="scripts/authnot.js" defer type="module"></script>
     <script src="scripts/whetheruserissignin.js" defer type="module"></script> -->
     <!-- <script src="./scripts/auth.js" type="module" defer></script> -->
-    <script type="module">
+    <script >
+      const preloader = document.querySelector(".preloader");
+if (preloader) {
+  window.addEventListener("load", () => {
+    preloader.style.display = "none";
+    preloader.remove();
+  });
+}
       // const form = document.querySelector("#signUpForm");
       // console.log(form)
       // form.addEventlistener("submit", (e) => {
