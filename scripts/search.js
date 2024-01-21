@@ -142,7 +142,9 @@ if (addToStalkList != null) {
       // localStorage.removeItem("handle");
       // localStorage.removeItem("imageUrl");
       // localStorage.removeItem("userUid");
-      alert("added to stalklist");
+      alert(
+        "added to stalklist. Click on Profile picture icon and go to stalklist to view your stalklist profile"
+      );
       location.reload();
     });
   });

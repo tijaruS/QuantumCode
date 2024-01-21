@@ -1,3 +1,11 @@
+const preloader = document.querySelector(".preloader");
+if (preloader) {
+  window.addEventListener("load", () => {
+    preloader.style.display = "none";
+    preloader.remove();
+  });
+}
+
 let subMenu = document.querySelector("#subMenu");
 function showMenu() {
   subMenu.classList.toggle("open-menu");
