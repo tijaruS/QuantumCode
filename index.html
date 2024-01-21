@@ -361,8 +361,8 @@
       <h1 style="justify-content: center; display: flex"></h1>
       <section class="">
         <div class="container">
-          <div class="d-flex">
-            <div class="image col-6">
+          <div class="row d-flex">
+            <div class="image col-sm">
               <video
                 src="./assets/hero.mp4"
                 loop
@@ -371,7 +371,7 @@
                 class="video"
               ></video>
             </div>
-            <div class="sometext col-6 ms-5">
+            <div class="sometext col-sm ms-md-5">
               <h2 class="fs-1 display-1">
                 Welcome to QuantumCode: Your Portal to Coding Excellence!
               </h2>
@@ -414,8 +414,8 @@
     <div class="apart">
       <div class="container text">
         <h1 style="text-align: center">WHAT SETS US APART?</h1>
-        <div class="d-flex">
-          <div class="col-8">
+        <div class="d-flex row">
+          <div class="col-sm">
             <h2 class="fs-1 display-4" style="font-weight: 500">
               Upcoming Contest Preview:
             </h2>
@@ -426,15 +426,15 @@
             </p>
             <a href="contest.html" class="btn btn-dark">View Contest</a>
           </div>
-          <div class="col-4">
+          <div class="col-sm">
             <img src="./assets/speaker.gif" alt="" height="300px" />
           </div>
         </div>
-        <div class="d-flex">
-          <div class="col-4">
+        <div class="d-flex row">
+          <div class="col-sm-4">
             <img src="./assets/seo.gif" alt="" height="300px" />
           </div>
-          <div class="col-8">
+          <div class="col-sm-8 mb-2">
             <h2 class="fs-1 display-1" style="font-weight: 500">
               User Search and Friend Add:
             </h2>
@@ -452,68 +452,72 @@
       <div class="container">
         <h1 class="fs-1 display-1 text-center">Key Features at a Glance:</h1>
         <div class="d-flex">
-          <div class="col-4 me-2">
-            <div
-              class="card card-one"
-              style="
-                background: rgb(63, 94, 251);
-                background: radial-gradient(
-                  circle,
-                  rgba(63, 94, 251, 1) 0%,
-                  rgba(252, 70, 107, 1) 100%
-                );
-              "
-            >
-              <div class="card-body">
-                <h5 class="card-title fs-1 display-1">Contest Countdown</h5>
-                <p class="card-text">
-                  Get a countdown to upcoming contests, ensuring you never miss
-                  an opportunity to showcase your skills.
-                </p>
+          <div class="row">
+            <div class="col-sm me-2 mb-2">
+              <div
+                class="card card-one"
+                style="
+                  background: rgb(63, 94, 251);
+                  background: radial-gradient(
+                    circle,
+                    rgba(63, 94, 251, 1) 0%,
+                    rgba(252, 70, 107, 1) 100%
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title fs-1 display-1">Contest Countdown</h5>
+                  <p class="card-text">
+                    Get a countdown to upcoming contests, ensuring you never
+                    miss an opportunity to showcase your skills.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-4 me-2">
-            <div
-              class="card card-two"
-              style="
-                background: linear-gradient(
-                  90deg,
-                  hsla(217, 100%, 50%, 1) 0%,
-                  hsla(186, 100%, 69%, 1) 100%
-                );
-              "
-            >
-              <div class="card-body">
-                <h5 class="card-title fs-1 display-1">Intuitive User Search</h5>
-                <p class="card-text">
-                  Find coding enthusiasts with similar interests or expertise,
-                  expanding your coding circle.
-                </p>
+            <div class="col-sm me-2 mb-2">
+              <div
+                class="card card-two"
+                style="
+                  background: linear-gradient(
+                    90deg,
+                    hsla(217, 100%, 50%, 1) 0%,
+                    hsla(186, 100%, 69%, 1) 100%
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title fs-1 display-1">
+                    Intuitive User Search
+                  </h5>
+                  <p class="card-text">
+                    Find coding enthusiasts with similar interests or expertise,
+                    expanding your coding circle.
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-4">
-            <div
-              class="card card-three"
-              style="
-                background: rgb(131, 58, 180);
-                background: linear-gradient(
-                  90deg,
-                  rgba(131, 58, 180, 1) 0%,
-                  rgba(253, 29, 29, 1) 50%,
-                  rgba(252, 176, 69, 1) 100%
-                );
-              "
-            >
-              <div class="card-body">
-                <h5 class="card-title fs-1 display-1">
-                  Friend Add Functionality
-                </h5>
-                <p class="card-text">
-                  Connect and collaborate with friends, fostering a supportive
-                  and engaging coding community.
-                </p>
+            <div class="col-sm">
+              <div
+                class="card card-three"
+                style="
+                  background: rgb(131, 58, 180);
+                  background: linear-gradient(
+                    90deg,
+                    rgba(131, 58, 180, 1) 0%,
+                    rgba(253, 29, 29, 1) 50%,
+                    rgba(252, 176, 69, 1) 100%
+                  );
+                "
+              >
+                <div class="card-body">
+                  <h5 class="card-title fs-1 display-1">
+                    Friend Add Functionality
+                  </h5>
+                  <p class="card-text">
+                    Connect and collaborate with friends, fostering a supportive
+                    and engaging coding community.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -526,7 +530,7 @@
     <footer id="footer">
       <div class="container">
         <div class="row d-flex justify-content-between">
-          <div class="col-4">
+          <div class="col-sm">
             <h3 class="fs-1 display-1">QuantumCode</h3>
             <p>
               QuantumCode is a coding platform that aims to provide a
@@ -535,7 +539,7 @@
               tools they need to excel.
             </p>
           </div>
-          <div class="col-4">
+          <div class="col-sm">
             <h3 class="fs-1 display-1">Contact Us</h3>
             <p>
               <i class="bi bi-geo-alt-fill"></i> IIT (ISM) Dhanbad, Jharkhand,
@@ -544,7 +548,7 @@
             <p><i class="bi bi-telephone-fill"></i> +91 123456789</p>
             <p><i class="bi bi-envelope-fill">contact@quantmcode.me</i></p>
           </div>
-          <div class="col-4">
+          <div class="col-sm">
             <h3 class="fs-1 display-1">Quick Links</h3>
             <ul class="list-unstyled">
               <li><a href="index.html" id="decoration">Home</a></li>
@@ -556,16 +560,15 @@
       </div>
       <hr />
 
-      <div class="container-fluid d-flex justify-content-between">
-        <div class="">
-          <div class="">
-            <p>
-              &copy; 2024 QuantumCode, All Rights Reserved. Made with
-              <i class="bi bi-heart-fill" style="color: red"></i> by Surajit
-            </p>
-          </div>
+      <div class="container-fluid d-flex justify-content-between row">
+        <div class="col-sm">
+          <p>
+            &copy; 2024 QuantumCode, All Rights Reserved. Made with
+            <i class="bi bi-heart-fill" style="color: red"></i> by Surajit
+          </p>
         </div>
-        <div class="list-unstyled d-flex">
+
+        <div class="list-unstyled d-flex justify-content-center col-sm">
           <li class="ms-3">
             <a
               class="text-black github"
