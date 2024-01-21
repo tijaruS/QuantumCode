@@ -241,8 +241,8 @@
   text-decoration: #fff;
 } */
 .profile-picture {
-  height: 200px;
-  width: 200px;
+  height: 175px;
+  width: 175px;
   object-fit: cover;
   object-position: center;
   border-radius: 10px;
@@ -275,7 +275,7 @@
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 .profile-name {
   font-family: Poppins, Arial, Helvetica, sans-serif;

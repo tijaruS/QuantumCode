@@ -78,7 +78,7 @@ onSnapshot(colRef, (snapshot) => {
   filteredObj.forEach((element) => {
     const div1 = document.createElement("div");
     div1.innerHTML = `
-        <div class="follower-card" data-id='${element.id}' id='card'>
+        <div class="follower-card col-sm" data-id='${element.id}' id='card'>
           <div>
             <img class="profile-picture" src='${element.ProfilePhotoURL}'alt="" />
           </div>

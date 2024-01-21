@@ -46,9 +46,7 @@ fetch("https://codeforces.com/api/contest.list")
         (contest.durationSeconds % 3600) / 60
       }m</center></td>
     <td><center><button type="button" class="btn btn-success text-wrap" 
-        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" ${disableButtonIfMoreThanTwoDays(
-          contest
-        )}>
+         ${disableButtonIfMoreThanTwoDays(contest)}>
         ${buttonIcon(contest)}
         ${buttonText(contest)}
         </button></center></td>
@@ -154,9 +152,7 @@ fetch("https://codeforces.com/api/contest.list")
         (contest.durationSeconds % 3600) / 60
       }m</center></td>
     <td><center><button type="button" class="btn btn-secondary text-wrap" 
-        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;" ${disableButtonIfMoreThanTwoDays(
-          contest
-        )}>
+         ${disableButtonIfMoreThanTwoDays(contest)}>
         ${buttonIcon(contest)}
         ${buttonText(contest)}
         </button></center></td>
@@ -175,9 +171,7 @@ fetch("https://codeforces.com/api/contest.list")
         const currentTime = new Date().getTime();
         const difference = startTime - currentTime;
         const differenceInDays = difference / (1000 * 60 * 60 * 24);
-        return differenceInDays > 2
-          ? "Not Started Yet"
-          : "Registration Closed view standings";
+        return differenceInDays > 2 ? "Not Started Yet" : "View Standings";
       }
       function buttonIcon(contest) {
         const startTime = contest.startTimeSeconds * 1000;
