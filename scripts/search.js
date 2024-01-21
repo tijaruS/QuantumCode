@@ -114,7 +114,7 @@ const firebaseConfig = {
   appId: "1:288891407284:web:6bf03397bc432e7d3e00e1",
   measurementId: "G-ZKRYZJE51V",
 };
-import { app } from "./auth.js";
+import { app, auth } from "./auth.js";
 // Initialize Firebase
 // const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
@@ -147,3 +147,14 @@ if (addToStalkList != null) {
     });
   });
 }
+const someText = document.querySelector("#sometext");
+
+auth.onAuthStateChanged(function (user) {
+  if (user) {
+    someText.style.display = "none";
+    addToStalkList.style.display = "block";
+  } else {
+    someText.style.display = "block";
+    addToStalkList.style.display = "none";
+  }
+});
