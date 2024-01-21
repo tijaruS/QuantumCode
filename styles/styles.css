@@ -451,7 +451,10 @@
 }
 
 #footer {
-  background: rgb(0, 0, 0);
+  background: url("/assets/blob-scene-haikei.svg") no-repeat,
+    rgb(0, 0, 0) no-repeat;
+  background-size: cover;
+  background-position: center;
 
   color: white;
   padding: 20px;
