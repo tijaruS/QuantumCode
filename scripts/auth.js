@@ -75,7 +75,7 @@ if (signUpForm != null) {
         e.preventDefault();
         const college = signUpForm["floatingCollegeName"].value;
         const email = signUpForm["floatingInput"].value;
-        const UserName = signUpForm["floatingUserName"].value;
+        // const UserName = signUpForm["floatingUserName"].value;
         const password = signUpForm["floatingPassword"].value;
         const confirmPassword = signUpForm["floatingConfirmPassword"].value;
         signUpButton.innerHTML = "Signing Up...";
