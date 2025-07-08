@@ -1,4 +1,4 @@
-view(https://tijarus.github.io/QuantumCode/)
+[view](https://tijarus.github.io/QuantumCode/)
 
 
 
